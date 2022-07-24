@@ -1,24 +1,24 @@
-
+import pandas as pd
 from dash import Dash, dcc, html, Input, Output
 import plotly.express as px
-import pandas as pd
 
 
-app = Dash(__name__)
+dash_app = Dash(__name__)
 
-app.title = "Soul Foods Data Viz"
+dash_app.title = "Soul Foods Data Viz"
 
-df = pd.read_csv('./data/processedDF2')
+df = pd.read_csv('data\processedDF2')
 
 fig = px.line(df, x="date", y="sales")
 
-app.layout = html.Div(style={'padding': 10}, children=[
+dash_app.layout = html.Div(style={'padding': 10}, children=[
     html.H1(
         children='Pink Morsel Sales Visualization',
         style={
             'textAlign': 'center',
             'font-family':'sans-serif'
-        }
+        },
+        id="header"
     ),
     
     html.Div([
@@ -34,7 +34,7 @@ app.layout = html.Div(style={'padding': 10}, children=[
     )
 ])
 
-@app.callback(
+@dash_app.callback(
     Output('salesGraph', 'figure'),
     Input('region', 'value'))
 
@@ -46,4 +46,4 @@ def update_graph(region):
     return fig
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    dash_app.run_server(debug=True)
