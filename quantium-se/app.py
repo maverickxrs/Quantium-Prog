@@ -7,7 +7,8 @@ dash_app = Dash(__name__)
 
 dash_app.title = "Soul Foods Data Viz"
 
-df = pd.read_csv('data\processedDF2')
+df = pd.read_csv('data/processedDF2')
+
 
 fig = px.line(df, x="date", y="sales")
 
@@ -46,4 +47,4 @@ def update_graph(region):
     return fig
 
 if __name__ == '__main__':
-    dash_app.run_server(debug=True)
+    dash_app.run(debug=True)
